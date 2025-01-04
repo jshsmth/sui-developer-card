@@ -1,6 +1,6 @@
 # Developer Card Smart Contract
 
-A smart contract developed as part of the Rise In Bootcamp curriculum, implementing a developer card system on the Sui blockchain.
+Create your own unique developer NFT on the Sui blockchain! This smart contract lets you mint a digital card showcasing your skills, experience, and contact information - think of it as your Web3 business card or developer portfolio that lives on-chain.
 
 ## Overview
 
