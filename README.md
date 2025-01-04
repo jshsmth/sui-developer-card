@@ -98,14 +98,6 @@ The `developer_card` module provides functionality to:
     - `contact`: `String`
     - `open_to_work`: `bool`
 
-## Getting Started
-
-### Prerequisites
-
-- Sui CLI installed
-- Access to the Sui blockchain network
-
-
 ## Usage
 
 The smart contract is deployed on the Sui devnet network with the following package ID:
@@ -113,7 +105,6 @@ The smart contract is deployed on the Sui devnet network with the following pack
 ```
 0x7c95fdeb759ae6e750769000968f24c7c8bbbab3d2866b5ffddb124a8f587039
 ```
-
 
 ### Creating a Developer Card
 
