@@ -46,6 +46,13 @@ module smart_contract::developer_card {
         new_description: String,
     }
 
+    public struct PortfolioUpdatedEvent has copy, drop {
+        name: String,
+        owner: address,
+        title: String,
+        new_portfolio: String,
+    }
+
     //==================INITIALIZE CONTRACT=======================//
     fun init(ctx: &mut TxContext) {
         transfer::share_object(
@@ -171,4 +178,21 @@ module smart_contract::developer_card {
     }
 
     //==================UPDATE PORTFOLIO============================//
+    public entry fun updatePortfolio(
+        devhub: &mut DeveloperHub,
+        id: u64,
+        new_portfolio: vector<u8>,
+        ctx: &mut TxContext
+    ) {
+        let card = object_table::borrow_mut(&mut devhub.cards, id);
+        assert!(card.owner == tx_context::sender(ctx), NOT_THE_OWNER);
+        card.portfolio = string::utf8(new_portfolio);
+
+        event::emit(PortfolioUpdatedEvent {
+            name: card.name,
+            owner: card.owner,
+            title: card.title,
+            new_portfolio: string::utf8(new_portfolio),
+        });
+    }
 }
