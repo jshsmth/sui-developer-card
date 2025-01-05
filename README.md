@@ -103,7 +103,7 @@ The `developer_card` module provides functionality to:
 The smart contract is deployed on the Sui devnet network with the following package ID:
 
 ```
-0xb604cedfd41874421a1caf4b9b980f6ce68f7ab29f61e5699f46c9da5fcb3cd1
+0xeb8324a1d68da2512e051d92e27ac6197e3832b97b9748db26c0e431aa017a7b 
 ```
 
 ### Creating a Developer Card

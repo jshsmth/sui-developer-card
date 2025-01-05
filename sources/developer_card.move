@@ -195,4 +195,51 @@ module smart_contract::developer_card {
             new_portfolio: string::utf8(new_portfolio),
         });
     }
+
+        //==================TEST ONLY============================//
+        #[test_only]
+        use sui::test_scenario;
+        #[test]
+        fun test_create_card() {
+
+            // Create test address
+            let owner = @0xA;
+            
+            let mut scenario = test_scenario::begin(owner);
+            {
+                init(test_scenario::ctx(&mut scenario));
+            };
+
+            test_scenario::next_tx(&mut scenario, owner);
+            {
+                let mut devhub = test_scenario::take_shared<DeveloperHub>(&scenario);
+                let coin = coin::mint_for_testing<SUI>(1, test_scenario::ctx(&mut scenario));
+
+                createCard(
+                    b"John Doe",                              
+                    b"Software Engineer",                    
+                    b"https://example.com/image.jpg",       
+                    5,
+                    b"Rust, Move, Solidity",                 
+                    b"https://github.com/johndoe",         
+                    b"john@example.com",                   
+                    coin,                                   
+                    &mut devhub,
+                    test_scenario::ctx(&mut scenario)
+                );
+
+                // Verify card was created
+                let (name, owner_addr, title, _, _, years_exp, _, _, _, open_to_work) = 
+                    getCard(&devhub, 1);
+                
+                assert!(string::utf8(b"John Doe") == name, 0);
+                assert!(owner == owner_addr, 0);
+                assert!(string::utf8(b"Software Engineer") == title, 0);
+                assert!(years_exp == 5, 0);
+                assert!(open_to_work == true, 0);
+
+                test_scenario::return_shared(devhub);
+            };
+            test_scenario::end(scenario);
+        }
 }
